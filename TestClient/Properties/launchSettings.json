@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "TestClient": {
+        "commandName": "Project",
+        "environmentVariables": {
+            "API_BASE_URL": "https://localhost:32769"
+        }
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
