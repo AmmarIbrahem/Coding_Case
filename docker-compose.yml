@@ -1,11 +1,11 @@
 services:
-  postsapi:
+  posts-api:
     build: 
         context: .
         dockerfile: PostsAPI/Dockerfile
     container_name: posts-api
     ports:
-      - "5000:8080"
+      - "5000:8080"  # External access via localhost:8080
     environment:
       - ASPNETCORE_URLS=http://+:8080
     healthcheck:
@@ -13,12 +13,24 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 20s
+      start_period: 10s
+    networks:
+      - app-network
 
-  testclient:
-    build: ./TestClient
-    depends_on:
-      postsapi:
-        condition: service_healthy
+  test-client:
+    build: 
+        context: .
+        dockerfile: TestClient/Dockerfile
+    container_name: test-client
     environment:
-      - API_BASE_URL=http://postsapi:8080
+      - API_BASE_URL=http://posts-api:8080
+    depends_on:
+        posts-api:
+            condition: service_healthy
+    networks:
+        - app-network
+    
+
+networks:
+  app-network:
+    driver: bridge

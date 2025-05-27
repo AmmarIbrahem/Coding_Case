@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Text;
 using System.Text.Json;
 using TestClient.Models;
 
@@ -7,6 +8,7 @@ namespace TestClient
 	class Program
 	{
 		private static readonly HttpClient httpClient = new HttpClient();
+
 		private static string baseUrl = Environment.GetEnvironmentVariable("API_BASE_URL") ?? "http://localhost:8080";
 		private static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions
 		{
@@ -16,6 +18,25 @@ namespace TestClient
 
 		static async Task Main(string[] args)
 		{
+			// Debug environment variables first
+			Console.WriteLine("=== Environment Variable Debug ===");
+			var apiUrl = Environment.GetEnvironmentVariable("API_BASE_URL");
+			Console.WriteLine($"API_BASE_URL = '{apiUrl}'");
+			Console.WriteLine($"Is null or empty: {string.IsNullOrEmpty(apiUrl)}");
+
+			// Show all environment variables for debugging
+			Console.WriteLine("\n=== All Environment Variables ===");
+			foreach (DictionaryEntry env in Environment.GetEnvironmentVariables())
+			{
+				Console.WriteLine($"{env.Key} = {env.Value}");
+			}
+
+			// Then use it
+			string baseUrl = apiUrl ?? "https://localhost:555";
+			Console.WriteLine($"\n=== Final baseUrl: {baseUrl} ===");
+
+
+
 			Console.WriteLine("🚀 Starting Posts API Test Client");
 			Console.WriteLine($"🌐 API Base URL: {baseUrl}");
 			Console.WriteLine(new string('=', 50));
