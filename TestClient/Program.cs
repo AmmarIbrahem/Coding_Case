@@ -18,29 +18,6 @@ namespace TestClient
 
 		static async Task Main(string[] args)
 		{
-			// Debug environment variables first
-			Console.WriteLine("=== Environment Variable Debug ===");
-			var apiUrl = Environment.GetEnvironmentVariable("API_BASE_URL");
-			Console.WriteLine($"API_BASE_URL = '{apiUrl}'");
-			Console.WriteLine($"Is null or empty: {string.IsNullOrEmpty(apiUrl)}");
-
-			// Show all environment variables for debugging
-			Console.WriteLine("\n=== All Environment Variables ===");
-			foreach (DictionaryEntry env in Environment.GetEnvironmentVariables())
-			{
-				Console.WriteLine($"{env.Key} = {env.Value}");
-			}
-
-			// Then use it
-			string baseUrl = apiUrl ?? "https://localhost:555";
-			Console.WriteLine($"\n=== Final baseUrl: {baseUrl} ===");
-
-
-
-			Console.WriteLine("🚀 Starting Posts API Test Client");
-			Console.WriteLine($"🌐 API Base URL: {baseUrl}");
-			Console.WriteLine(new string('=', 50));
-
 			// Wait for API to be ready
 			await WaitForApiAsync();
 
