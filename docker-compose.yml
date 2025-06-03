@@ -5,11 +5,12 @@ services:
         dockerfile: PostsAPI/Dockerfile
     container_name: posts-api
     ports:
-      - "5000:8080"  # External access via localhost:8080
+      - "5000:5000"  # External access via localhost:5000
     environment:
-      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_URLS=http://+:5000
+      - ASPNETCORE_ENVIRONMENT=Development 
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -23,7 +24,7 @@ services:
         dockerfile: TestClient/Dockerfile
     container_name: test-client
     environment:
-      - API_BASE_URL=http://posts-api:8080
+      - API_BASE_URL=http://posts-api:5000
     depends_on:
         posts-api:
             condition: service_healthy
