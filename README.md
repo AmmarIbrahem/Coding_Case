@@ -1,4 +1,4 @@
-﻿# Posts API - SECLOUS Coding Assessment
+﻿# Posts API 
 
 A simple REST API for managing blog posts, built with .NET 8 and containerized with Docker.
 
@@ -102,4 +102,4 @@ The API implements the following endpoints as per the OpenAPI specification:
 ---
 
 **Author**: Ammar Fouda  
-**Assessment**: SECLOUS Coding Case 2025-05
+**Assessment**:2025-05
